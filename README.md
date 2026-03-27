@@ -62,6 +62,9 @@ devtoolkit <tool> --help   # tool-specific help
 |-----|------|---------|-------------|
 | Day 1 | 🍅 Pomodoro Timer | `devtoolkit timer` | Countdown timer with Pomodoro defaults (25 min) |
 | Day 2 | 🌤 Weather | `devtoolkit weather` | Live weather lookup via wttr.in — no API key needed |
+| Day 3 | 🔐 Password Generator | `devtoolkit passgen` | Cryptographically secure password & PIN generator |
+| Day 4 | 📋 JSON Formatter | `devtoolkit jsonfmt` | Pretty-print, minify, validate, and inspect JSON |
+| Day 5 | 🔑 Hash Calculator | `devtoolkit hashit` | Compute MD5/SHA/BLAKE2 hashes for files or strings |
 
 ### `timer` — Pomodoro Timer
 
@@ -105,6 +108,66 @@ devtoolkit weather -c London --lang zh  # Chinese output
 | `2` | `Partly cloudy +22°C` |
 | `3` | `Taipei: ⛅ Partly cloudy +22°C 72% ↗ 15km/h` |
 | `4` | `Taipei: ⛅ Partly cloudy, +22°C (feels +21°C), humidity 72%, wind ↗ 15km/h` |
+
+### `passgen` — Password Generator
+
+```bash
+devtoolkit passgen                         # 16-char password (default)
+devtoolkit passgen -l 32                   # 32-char password
+devtoolkit passgen -n 5                    # Generate 5 passwords
+devtoolkit passgen --no-symbols            # Letters + digits only
+devtoolkit passgen --no-upper --no-lower   # Digits + symbols only
+devtoolkit passgen --pin 6                 # 6-digit numeric PIN
+```
+
+| Flag | Default | Description |
+|------|---------|-------------|
+| `-l`, `--length` | `16` | Password length |
+| `-n`, `--count` | `1` | Number of passwords to generate |
+| `--no-upper` | off | Exclude uppercase letters |
+| `--no-lower` | off | Exclude lowercase letters |
+| `--no-digits` | off | Exclude digits |
+| `--no-symbols` | off | Exclude special symbols |
+| `--pin DIGITS` | — | Generate a numeric PIN of given length |
+
+### `jsonfmt` — JSON Formatter & Validator
+
+```bash
+devtoolkit jsonfmt data.json               # Pretty-print
+cat data.json | devtoolkit jsonfmt         # From stdin
+devtoolkit jsonfmt data.json --compact     # Minify JSON
+devtoolkit jsonfmt data.json --check       # Validate only
+devtoolkit jsonfmt data.json --keys        # List top-level keys
+devtoolkit jsonfmt data.json --sort-keys   # Sort keys alphabetically
+```
+
+| Flag | Default | Description |
+|------|---------|-------------|
+| `FILE` | stdin | JSON file path (optional) |
+| `--indent N` | `4` | Indentation width |
+| `--compact` | off | Output minified JSON |
+| `--check` | off | Validate only; exit 0 = valid, 1 = invalid |
+| `--keys` | off | Show top-level keys with type info |
+| `--sort-keys` | off | Sort object keys alphabetically |
+
+### `hashit` — Hash Calculator
+
+```bash
+devtoolkit hashit -t "hello world"           # SHA-256 of a string (default)
+devtoolkit hashit -f myfile.zip              # SHA-256 of a file
+devtoolkit hashit -t "hello" -a md5          # MD5 hash
+devtoolkit hashit -f myfile.zip --all        # All supported algorithms
+devtoolkit hashit -f myfile.zip --verify abc123  # Verify against known hash
+```
+
+| Flag | Default | Description |
+|------|---------|-------------|
+| `-f`, `--file FILE` | — | File to hash |
+| `-t`, `--text TEXT` | — | String to hash (UTF-8) |
+| `-a`, `--algo ALGO` | `sha256` | Algorithm: md5, sha1, sha224, sha256, sha384, sha512, blake2b, blake2s |
+| `--all` | off | Compute all algorithms at once |
+| `--verify HASH` | — | Compare against a known hash (exit 1 on mismatch) |
+| `--upper` | off | Output hash in UPPERCASE |
 
 ---
 
@@ -159,7 +222,10 @@ devtoolkit/
 │   └── tools/
 │       ├── __init__.py
 │       ├── timer.py         # Day 1: Pomodoro Timer
-│       └── weather.py       # Day 2: Weather Lookup
+│       ├── weather.py       # Day 2: Weather Lookup
+│       ├── passgen.py       # Day 3: Password Generator
+│       ├── jsonfmt.py       # Day 4: JSON Formatter & Validator
+│       └── hashit.py        # Day 5: Hash Calculator
 └── .gitignore
 ```
 
@@ -169,11 +235,9 @@ devtoolkit/
 
 | Day | Planned Tool | Description |
 |-----|-------------|-------------|
-| Day 3 | 📝 Note | Quick sticky-note saver to a local markdown file |
-| Day 4 | 🔐 Passgen | Secure random password generator |
-| Day 5 | 📋 Clipboard | Cross-platform clipboard history viewer |
-| Day 6 | 🔍 JSONFmt | Pretty-print and validate JSON from stdin or file |
-| Day 7 | ⏰ Cron Helper | Human-readable cron expression explainer |
+| Day 6 | 📝 Note | Quick sticky-note saver to a local markdown file |
+| Day 7 | 📋 Clipboard | Cross-platform clipboard history viewer |
+| Day 8 | ⏰ Cron Helper | Human-readable cron expression explainer |
 
 ---
 
