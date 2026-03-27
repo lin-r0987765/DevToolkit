@@ -74,6 +74,9 @@ devtoolkit <tool> --help   # tool-specific help
 | Day 12 | 📊 Word Count | `devtoolkit wordcount` | Count words, lines, characters, and sentences in text or files |
 | Day 13 | 🎲 Dice Roller | `devtoolkit dice` | Roll dice using RPG notation (e.g. 2d6, 1d20+5, 4d6kh3) |
 | Day 14 | 📝 Lorem Ipsum | `devtoolkit lorem` | Generate lorem ipsum placeholder text for design and development |
+| Day 15 | 🔤 ROT13 Cipher | `devtoolkit rot13` | Encode/decode text with ROT13 or custom rotation shift |
+| Day 16 | 🎨 Color Converter | `devtoolkit colorconv` | Convert colours between HEX, RGB, and HSL formats |
+| Day 17 | 💻 System Info | `devtoolkit sysinfo` | Display system, Python, and disk usage information |
 
 ### `timer` — Pomodoro Timer
 
@@ -339,6 +342,54 @@ devtoolkit lorem -p 2 --copy     # No trailing newline (for piping)
 | `--seed` | — | Random seed for reproducible output |
 | `--copy` | off | No trailing newline (useful for piping) |
 
+### `rot13` — ROT13 Cipher
+
+```bash
+devtoolkit rot13 "Hello World"            # Encode with ROT13
+devtoolkit rot13 "Uryyb Jbeyq"            # Decode (ROT13 is self-inverse)
+devtoolkit rot13 -n 5 "Hello"             # Caesar cipher with shift 5
+devtoolkit rot13 -f secret.txt            # Encode a file
+echo "secret" | devtoolkit rot13          # From stdin
+```
+
+| Flag | Default | Description |
+|------|---------|-------------|
+| `TEXT` | stdin | Text to encode/decode |
+| `-n`, `--shift` | `13` | Rotation shift amount (1–25) |
+| `-f`, `--file` | — | Read input from a file |
+
+### `colorconv` — Color Converter
+
+```bash
+devtoolkit colorconv "#ff8800"                 # Parse HEX
+devtoolkit colorconv "rgb(255, 136, 0)"        # Parse RGB string
+devtoolkit colorconv --rgb 255 136 0           # RGB values
+devtoolkit colorconv --hex ff8800              # HEX without hash
+devtoolkit colorconv --hsl 32 100 50           # HSL values
+```
+
+| Flag | Default | Description |
+|------|---------|-------------|
+| `COLOR` | — | Auto-detect format: HEX, rgb(...), hsl(...) |
+| `--hex` | — | Input as HEX string |
+| `--rgb R G B` | — | Input as RGB 0–255 |
+| `--hsl H S L` | — | Input as HSL (H: 0–360, S/L: 0–100) |
+
+### `sysinfo` — System Info
+
+```bash
+devtoolkit sysinfo                  # Show all info
+devtoolkit sysinfo --python         # Python environment only
+devtoolkit sysinfo --disk           # Disk usage only
+devtoolkit sysinfo --json           # Output as JSON
+```
+
+| Flag | Default | Description |
+|------|---------|-------------|
+| `--python` | off | Show Python environment details only |
+| `--disk` | off | Show disk usage only |
+| `--json` | off | Output as JSON |
+
 ---
 
 ## ➕ How to Add a New Tool
@@ -404,7 +455,10 @@ devtoolkit/
 │       ├── baseconv.py     # Day 11: Base Converter
 │       ├── wordcount.py   # Day 12: Word Count
 │       ├── dice.py        # Day 13: Dice Roller
-│       └── lorem.py       # Day 14: Lorem Ipsum Generator
+│       ├── lorem.py       # Day 14: Lorem Ipsum Generator
+│       ├── rot13.py       # Day 15: ROT13 Cipher
+│       ├── colorconv.py   # Day 16: Color Converter
+│       └── sysinfo.py     # Day 17: System Info
 └── .gitignore
 ```
 
