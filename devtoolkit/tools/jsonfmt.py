@@ -19,41 +19,41 @@ from devtoolkit.core.plugin import BaseTool
 
 class JsonFmtTool(BaseTool):
     name = "jsonfmt"
-    description = "📋 Pretty-print, validate, and inspect JSON files"
+    description = "📋 美化、驗證與檢查 JSON 檔案"
 
     def add_arguments(self, parser: argparse.ArgumentParser) -> None:
         parser.add_argument(
             "file",
             nargs="?",
             metavar="FILE",
-            help="Path to a JSON file (reads from stdin if omitted)",
+            help="JSON 檔案路徑 (若省略則讀取 stdin)",
         )
         parser.add_argument(
             "--indent",
             type=int,
             default=4,
             metavar="N",
-            help="Indentation width (default: 4)",
+            help="縮排寬度 (預設: 4)",
         )
         parser.add_argument(
             "--compact",
             action="store_true",
-            help="Output minified (compact) JSON instead of pretty-printing",
+            help="輸出最小化 (緊湊) 的 JSON 而非美化格式",
         )
         parser.add_argument(
             "--check",
             action="store_true",
-            help="Validate JSON only; print result and exit with code 0 (valid) or 1 (invalid)",
+            help="僅驗證 JSON；印出結果並帶著結束碼 0 (有效) 或 1 (無效) 離開",
         )
         parser.add_argument(
             "--keys",
             action="store_true",
-            help="List top-level keys (object) or index count (array)",
+            help="列出頂層鍵值 (物件) 或索引數量 (陣列)",
         )
         parser.add_argument(
             "--sort-keys",
             action="store_true",
-            help="Sort object keys alphabetically in the output",
+            help="依字母順序排列輸出中的物件鍵值",
         )
 
     def _load(self, args: argparse.Namespace):

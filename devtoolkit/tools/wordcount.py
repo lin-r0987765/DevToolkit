@@ -8,23 +8,23 @@ from devtoolkit.core.plugin import BaseTool
 
 class WordCountTool(BaseTool):
     name = "wordcount"
-    description = "Count words, lines, characters, and sentences in text or files"
+    description = "計算文字或檔案中的單字、行、字元與句子數量"
 
     def add_arguments(self, parser: argparse.ArgumentParser) -> None:
         parser.add_argument("file", nargs="?", default=None,
-                            help="File to analyze (reads stdin if omitted)")
+                            help="要分析的檔案 (若省略則讀取 stdin)")
         parser.add_argument("-t", "--text", default=None,
-                            help="Analyze a string directly")
+                            help="直接分析字串")
         parser.add_argument("--chars", action="store_true",
-                            help="Show only character count")
+                            help="僅顯示字元數量")
         parser.add_argument("--words", action="store_true",
-                            help="Show only word count")
+                            help="僅顯示單字數量")
         parser.add_argument("--lines", action="store_true",
-                            help="Show only line count")
+                            help="僅顯示行數")
         parser.add_argument("--sentences", action="store_true",
-                            help="Show only sentence count")
+                            help="僅顯示句子數量")
         parser.add_argument("--freq", type=int, default=0, metavar="N",
-                            help="Show top N most frequent words")
+                            help="顯示出現頻率前 N 高的單字")
 
     def run(self, args: argparse.Namespace) -> None:
         # Get input text

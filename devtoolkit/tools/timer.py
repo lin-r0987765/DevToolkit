@@ -16,7 +16,7 @@ from devtoolkit.core.plugin import BaseTool
 
 class TimerTool(BaseTool):
     name = "timer"
-    description = "🍅 Pomodoro countdown timer (default: 25 min)"
+    description = "🍅 番茄鐘倒數計時器 (預設: 25 分鐘)"
 
     def add_arguments(self, parser: argparse.ArgumentParser) -> None:
         parser.add_argument(
@@ -24,26 +24,26 @@ class TimerTool(BaseTool):
             type=float,
             default=25.0,
             metavar="MIN",
-            help="Duration in minutes (default: 25)",
+            help="持續時間（分鐘） (預設: 25)",
         )
         parser.add_argument(
             "-s", "--seconds",
             type=float,
             default=0.0,
             metavar="SEC",
-            help="Additional seconds to add to the timer (default: 0)",
+            help="計時器額外增加的秒數 (預設: 0)",
         )
         parser.add_argument(
             "-l", "--label",
             type=str,
             default="Pomodoro",
             metavar="LABEL",
-            help='Session label (default: "Pomodoro")',
+            help='工作階段標籤 (預設: "Pomodoro")',
         )
         parser.add_argument(
             "--no-progress",
             action="store_true",
-            help="Disable the live countdown display",
+            help="停用即時倒數顯示",
         )
 
     def run(self, args: argparse.Namespace) -> None:

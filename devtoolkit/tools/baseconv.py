@@ -64,7 +64,7 @@ def _format_value(n: int, base: str) -> str:
 
 class BaseConvTool(BaseTool):
     name = "baseconv"
-    description = "🔢 Convert integers between decimal, hex, binary, and octal"
+    description = "🔢 在十進制、十六進制、二進制及八進制之間轉換整數"
 
     def add_arguments(self, parser: argparse.ArgumentParser) -> None:
         parser.add_argument(
@@ -79,13 +79,13 @@ class BaseConvTool(BaseTool):
             "-i", "--input-base",
             choices=list(BASE_MAP.keys()),
             metavar="BASE",
-            help="Override input base (dec, hex, bin, oct). Default: auto-detect from prefix.",
+            help="覆寫輸入進制 (dec, hex, bin, oct)。預設為從前綴自動偵測。",
         )
         parser.add_argument(
             "-o", "--output-base",
             choices=list(BASE_MAP.keys()),
             metavar="BASE",
-            help="Output only this base. Default: show all bases.",
+            help="僅輸出指定進制。預設為顯示所有進制。",
         )
 
     def run(self, args: argparse.Namespace) -> None:

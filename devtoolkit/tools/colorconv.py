@@ -12,24 +12,24 @@ from devtoolkit.core.plugin import BaseTool
 
 class ColorConvTool(BaseTool):
     name = "colorconv"
-    description = "Convert colours between HEX, RGB, and HSL formats"
+    description = "在 HEX, RGB 與 HSL 顏色格式之間進行轉換"
 
     def add_arguments(self, parser: argparse.ArgumentParser) -> None:
         parser.add_argument(
-            "color", nargs="?", default=None,
-            help='Colour value, e.g. "#ff8800", "rgb(255,136,0)", "hsl(32,100%%,50%%)"',
+            "value", nargs="?", default=None,
+            help='顏色數值，例如 "#ff8800", "rgb(255,136,0)", "hsl(32,100%%,50%%)"',
         )
         parser.add_argument(
             "--hex", default=None,
-            help="Input as HEX (e.g. ff8800 or #ff8800)",
+            help="輸入 HEX 格式 (例如 ff8800 或 #ff8800)",
         )
         parser.add_argument(
             "--rgb", nargs=3, type=int, metavar=("R", "G", "B"),
-            help="Input as RGB values 0-255",
+            help="輸入 RGB 數值 (0-255)",
         )
         parser.add_argument(
             "--hsl", nargs=3, type=float, metavar=("H", "S", "L"),
-            help="Input as HSL (H: 0-360, S: 0-100, L: 0-100)",
+            help="輸入 HSL 格式 (H: 0-360, S: 0-100, L: 0-100)",
         )
 
     def run(self, args: argparse.Namespace) -> None:

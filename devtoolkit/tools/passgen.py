@@ -20,7 +20,7 @@ from devtoolkit.core.plugin import BaseTool
 
 class PassgenTool(BaseTool):
     name = "passgen"
-    description = "🔐 Generate cryptographically secure random passwords"
+    description = "🔐 產生安全強度的隨機密碼"
 
     def add_arguments(self, parser: argparse.ArgumentParser) -> None:
         parser.add_argument(
@@ -28,40 +28,40 @@ class PassgenTool(BaseTool):
             type=int,
             default=16,
             metavar="N",
-            help="Password length (default: 16)",
+            help="密碼長度 (預設: 16)",
         )
         parser.add_argument(
             "-n", "--count",
             type=int,
             default=1,
             metavar="N",
-            help="Number of passwords to generate (default: 1)",
+            help="產生密碼的數量 (預設: 1)",
         )
         parser.add_argument(
             "--no-upper",
             action="store_true",
-            help="Exclude uppercase letters",
+            help="排除大寫字母",
         )
         parser.add_argument(
             "--no-lower",
             action="store_true",
-            help="Exclude lowercase letters",
+            help="排除小寫字母",
         )
         parser.add_argument(
             "--no-digits",
             action="store_true",
-            help="Exclude digits",
+            help="排除數字",
         )
         parser.add_argument(
             "--no-symbols",
             action="store_true",
-            help="Exclude special symbols",
+            help="排除特殊符號",
         )
         parser.add_argument(
             "--pin",
             type=int,
             metavar="DIGITS",
-            help="Generate a numeric PIN of the given length (overrides other flags)",
+            help="產生指定長度的純數字 PIN 碼 (覆蓋其他選項)",
         )
 
     def run(self, args: argparse.Namespace) -> None:

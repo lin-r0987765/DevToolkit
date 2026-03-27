@@ -11,20 +11,20 @@ from devtoolkit.core.plugin import BaseTool
 
 class Rot13Tool(BaseTool):
     name = "rot13"
-    description = "Encode/decode text with ROT13 (or custom rotation N)"
+    description = "使用 ROT13 (或自訂位移 N) 對文字進行編碼/解碼"
 
     def add_arguments(self, parser: argparse.ArgumentParser) -> None:
         parser.add_argument(
             "text", nargs="?", default=None,
-            help="Text to encode/decode (reads stdin if omitted)",
+            help="要編碼/解碼的文字 (若省略則讀取 stdin)",
         )
         parser.add_argument(
             "-n", "--shift", type=int, default=13,
-            help="Rotation shift amount (default: 13)",
+            help="位移量 (預設: 13)",
         )
         parser.add_argument(
             "-f", "--file", default=None,
-            help="Read input from a file",
+            help="從檔案讀取輸入",
         )
 
     def run(self, args: argparse.Namespace) -> None:

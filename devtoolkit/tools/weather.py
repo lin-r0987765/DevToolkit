@@ -28,7 +28,7 @@ FORMATS = {
 
 class WeatherTool(BaseTool):
     name = "weather"
-    description = "🌤  Check the weather for any city via wttr.in (no API key needed)"
+    description = "🌤  透過 wttr.in 查詢任何城市的天氣 (無需 API 金鑰)"
 
     def add_arguments(self, parser: argparse.ArgumentParser) -> None:
         parser.add_argument(
@@ -36,7 +36,7 @@ class WeatherTool(BaseTool):
             type=str,
             default="Taipei",
             metavar="CITY",
-            help='City name to look up (default: "Taipei")',
+            help='要查詢的城市名稱 (預設: "Taipei")',
         )
         parser.add_argument(
             "-f", "--format",
@@ -55,14 +55,14 @@ class WeatherTool(BaseTool):
         parser.add_argument(
             "--full",
             action="store_true",
-            help="Show full ASCII art forecast (ignores --format)",
+            help="顯示完整的 ASCII 藝術天氣預報 (忽略 --format)",
         )
         parser.add_argument(
             "--lang",
             type=str,
             default="en",
             metavar="LANG",
-            help="Language code for the response (default: en). E.g. zh, ja, fr",
+            help="回覆語言代碼 (預設: en)，例如 zh, ja, fr",
         )
 
     def run(self, args: argparse.Namespace) -> None:

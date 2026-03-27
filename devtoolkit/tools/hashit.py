@@ -1,6 +1,6 @@
 """
 Day 5 Tool: Hash Calculator
-Compute cryptographic hashes for files or text strings.
+計算檔案或文字字串的加密雜湊值.
 
 Usage:
     devtoolkit hashit -t "hello world"           # SHA-256 of a string
@@ -39,19 +39,19 @@ def _hash_file(path: str, algo: str) -> str:
 
 class HashItTool(BaseTool):
     name = "hashit"
-    description = "🔑 Compute cryptographic hashes for files or text strings"
+    description = "🔑 計算檔案或文字字串的加密雜湊值"
 
     def add_arguments(self, parser: argparse.ArgumentParser) -> None:
         source = parser.add_mutually_exclusive_group(required=True)
         source.add_argument(
             "-f", "--file",
             metavar="FILE",
-            help="Path to the file to hash",
+            help="要進行雜湊的檔案路徑",
         )
         source.add_argument(
             "-t", "--text",
             metavar="TEXT",
-            help="Text string to hash (UTF-8 encoded)",
+            help="要進行雜湊的文字字串 (UTF-8 編碼)",
         )
 
         parser.add_argument(
@@ -59,22 +59,22 @@ class HashItTool(BaseTool):
             choices=SUPPORTED,
             default="sha256",
             metavar="ALGO",
-            help=f"Hash algorithm (default: sha256). Choices: {', '.join(SUPPORTED)}",
+            help=f"雜湊演算法 (預設: sha256)。選項: {', '.join(SUPPORTED)}",
         )
         parser.add_argument(
             "--all",
             action="store_true",
-            help="Compute all supported hash algorithms at once",
+            help="同時計算所有支援的雜湊演算法",
         )
         parser.add_argument(
             "--verify",
             metavar="HASH",
-            help="Compare computed hash against this known value (case-insensitive)",
+            help="比對計算出的雜湊值與已知值 (不分大小寫)",
         )
         parser.add_argument(
             "--upper",
             action="store_true",
-            help="Output hash in UPPERCASE",
+            help="以大寫輸出雜湊值",
         )
 
     def _compute(self, args: argparse.Namespace, algo: str) -> str:

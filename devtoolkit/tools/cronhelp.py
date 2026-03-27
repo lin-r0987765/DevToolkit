@@ -1,6 +1,6 @@
 """
 Day 10 Tool: Cron Helper
-Parse and explain cron expressions in plain human-readable language.
+解析並以白話文解釋 cron 表達式.
 Also list the next N scheduled run times.
 
 Usage:
@@ -171,26 +171,26 @@ def _next_runs(expr: str, count: int) -> list[datetime]:
 
 class CronHelpTool(BaseTool):
     name = "cronhelp"
-    description = "⏰ Parse and explain cron expressions in plain human-readable language"
+    description = "⏰ 解析並以白話文解釋 cron 表達式"
 
     def add_arguments(self, parser: argparse.ArgumentParser) -> None:
         parser.add_argument(
             "expression",
             nargs="?",
             metavar="EXPRESSION",
-            help='Cron expression in quotes, e.g. "0 9 * * 1-5"',
+            help='包含在引號內的 Cron 表達式，例如 "0 9 * * 1-5"',
         )
         parser.add_argument(
             "-n", "--next",
             metavar="N",
             type=int,
             default=0,
-            help="Show next N scheduled run times (default: 0)",
+            help="顯示接下來的 N 次預定執行時間 (預設: 0)",
         )
         parser.add_argument(
             "--examples",
             action="store_true",
-            help="Show a table of common cron examples",
+            help="顯示常見 cron 範列表格",
         )
 
     def run(self, args: argparse.Namespace) -> None:

@@ -21,35 +21,35 @@ DEFAULT_NOTE_FILE = os.path.expanduser("~/.devtoolkit_notes.md")
 
 class NoteTool(BaseTool):
     name = "note"
-    description = "📝 Quickly save and list notes in a local Markdown file"
+    description = "📝 快速在本地的 Markdown 檔案中儲存與列出筆記"
 
     def add_arguments(self, parser: argparse.ArgumentParser) -> None:
         parser.add_argument(
             "text",
             nargs="?",
             metavar="TEXT",
-            help="Note text to add (omit to list notes)",
+            help="要新增的筆記內容 (省略則列出所有筆記)",
         )
         parser.add_argument(
             "-l", "--list",
             action="store_true",
-            help="List all saved notes",
+            help="列出所有已儲存的筆記",
         )
         parser.add_argument(
             "-s", "--search",
             metavar="QUERY",
-            help="Search notes by keyword (case-insensitive)",
+            help="使用關鍵字搜尋筆記 (不分大小寫)",
         )
         parser.add_argument(
             "--clear",
             action="store_true",
-            help="Delete all saved notes",
+            help="刪除所有已儲存的筆記",
         )
         parser.add_argument(
             "--file",
             metavar="FILE",
             default=DEFAULT_NOTE_FILE,
-            help=f"Note file path (default: {DEFAULT_NOTE_FILE})",
+            help=f"筆記檔案路徑 (預設: {DEFAULT_NOTE_FILE})",
         )
 
     def _read_notes(self, path: str) -> list[str]:

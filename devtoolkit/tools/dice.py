@@ -8,17 +8,17 @@ from devtoolkit.core.plugin import BaseTool
 
 class DiceTool(BaseTool):
     name = "dice"
-    description = "Roll dice using RPG notation (e.g. 2d6, 1d20+5, 4d6kh3)"
+    description = "使用 RPG 擲骰表示法進行投擲 (例如 2d6, 1d20+5, 4d6kh3)"
 
     def add_arguments(self, parser: argparse.ArgumentParser) -> None:
         parser.add_argument("expression", nargs="?", default="1d6",
-                            help="Dice expression: NdS[+/-M] or NdS[kh/kl]K (default: 1d6)")
+                            help="擲骰表示法: NdS[+/-M] 或 NdS[kh/kl]K (預設: 1d6)")
         parser.add_argument("-n", "--repeat", type=int, default=1,
-                            help="Roll the expression N times (default: 1)")
+                            help="執行擲骰運算 N 次 (預設: 1)")
         parser.add_argument("-s", "--stats", action="store_true",
-                            help="Show sum, min, max, and average after multiple rolls")
+                            help="在多次投擲後顯示總和、最小值、最大值與平均值")
         parser.add_argument("--seed", type=int, default=None,
-                            help="Set random seed for reproducible results")
+                            help="設定隨機亂數種子以得到可重現的結果")
 
     def run(self, args: argparse.Namespace) -> None:
         if args.seed is not None:

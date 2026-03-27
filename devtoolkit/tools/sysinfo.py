@@ -14,20 +14,20 @@ from devtoolkit.core.plugin import BaseTool
 
 class SysInfoTool(BaseTool):
     name = "sysinfo"
-    description = "Display system, Python, and disk information"
+    description = "顯示系統、Python 及磁碟資訊"
 
     def add_arguments(self, parser: argparse.ArgumentParser) -> None:
         parser.add_argument(
             "--disk", action="store_true",
-            help="Show disk usage for common mount points",
+            help="顯示常見掛載點的磁碟使用率",
         )
         parser.add_argument(
             "--python", action="store_true",
-            help="Show Python environment details only",
+            help="僅顯示 Python 環境資訊",
         )
         parser.add_argument(
             "--json", action="store_true", dest="as_json",
-            help="Output as JSON",
+            help="將輸出格式化為 JSON",
         )
 
     def run(self, args: argparse.Namespace) -> None:

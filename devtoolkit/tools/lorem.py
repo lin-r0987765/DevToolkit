@@ -29,21 +29,21 @@ _FIRST_SENTENCE = (
 
 class LoremTool(BaseTool):
     name = "lorem"
-    description = "Generate lorem ipsum placeholder text (words, sentences, or paragraphs)"
+    description = "產生 lorem ipsum 測試用假文 (單字、句子或段落)"
 
     def add_arguments(self, parser: argparse.ArgumentParser) -> None:
         parser.add_argument("-w", "--words", type=int, default=0, metavar="N",
-                            help="Generate exactly N words")
+                            help="產生指定的 N 個單字")
         parser.add_argument("-s", "--sentences", type=int, default=0, metavar="N",
-                            help="Generate exactly N sentences")
+                            help="產生指定的 N 個句子")
         parser.add_argument("-p", "--paragraphs", type=int, default=0, metavar="N",
-                            help="Generate N paragraphs (default: 1)")
+                            help="產生 N 個段落 (預設: 1)")
         parser.add_argument("--no-classic", action="store_true",
-                            help="Don't start with the classic 'Lorem ipsum dolor sit amet...'")
+                            help="不以傳統的 'Lorem ipsum...' 當作開頭")
         parser.add_argument("--seed", type=int, default=None,
-                            help="Random seed for reproducible output")
+                            help="設定隨機亂數種子，以產生可重現的輸出")
         parser.add_argument("--copy", action="store_true",
-                            help="Print without trailing newline (useful for piping)")
+                            help="印出時不要加上結尾換行字元 (適用於管線 piping)")
 
     def run(self, args: argparse.Namespace) -> None:
         rng = random.Random(args.seed)
