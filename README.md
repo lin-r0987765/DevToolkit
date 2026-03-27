@@ -68,6 +68,9 @@ devtoolkit <tool> --help   # tool-specific help
 | Day 6 | 🆔 UUID 產生器 | `devtoolkit uuidgen` | 產生 UUID v1/v4/v5，支援大寫與批次輸出 |
 | Day 7 | 🔄 Base64 編解碼 | `devtoolkit base64tool` | Base64 編碼與解碼，支援字串、檔案與 URL-safe 模式 |
 | Day 8 | ⏱ 時間戳轉換 | `devtoolkit epoch` | Unix 時間戳與可讀時間互轉，支援時區與毫秒 |
+| Day 9 | 📝 Quick Note | `devtoolkit note` | Save, list, and search notes in a local Markdown file |
+| Day 10 | ⏰ Cron Helper | `devtoolkit cronhelp` | Parse and explain cron expressions in plain language |
+| Day 11 | 🔢 Base Converter | `devtoolkit baseconv` | Convert integers between decimal, hex, binary, and octal |
 
 ### `timer` — Pomodoro Timer
 
@@ -227,6 +230,55 @@ devtoolkit epoch -r "2024-01-15 12:30:00"  # 可讀時間 → 時間戳
 | `--tz` | — | UTC 偏移（小時） |
 | `--ms` | off | 輸入為毫秒級時間戳 |
 
+### `note` — Quick Note
+
+```bash
+devtoolkit note "Remember to update docs"   # Add a note
+devtoolkit note -l                          # List all notes
+devtoolkit note -s "update"                 # Search notes by keyword
+devtoolkit note --clear                     # Delete all notes
+devtoolkit note --file ~/my_notes.md "hi"  # Use a custom notes file
+```
+
+| Flag | Default | Description |
+|------|---------|-------------|
+| `TEXT` | — | Note text to save |
+| `-l`, `--list` | off | List all saved notes |
+| `-s`, `--search QUERY` | — | Search notes by keyword (case-insensitive) |
+| `--clear` | off | Delete all saved notes |
+| `--file FILE` | `~/.devtoolkit_notes.md` | Custom notes file path |
+
+### `cronhelp` — Cron Expression Helper
+
+```bash
+devtoolkit cronhelp "* * * * *"          # Every minute
+devtoolkit cronhelp "0 9 * * 1-5"        # Explain weekday schedule
+devtoolkit cronhelp "0 0 1 * *" -n 5     # Show next 5 run times
+devtoolkit cronhelp --examples            # Show common cron patterns
+```
+
+| Flag | Default | Description |
+|------|---------|-------------|
+| `EXPRESSION` | — | Cron expression in quotes |
+| `-n`, `--next N` | `0` | Show next N scheduled run times |
+| `--examples` | off | Print a table of common cron expressions |
+
+### `baseconv` — Base Converter
+
+```bash
+devtoolkit baseconv 255               # Decimal → hex, bin, oct
+devtoolkit baseconv 0xFF              # Hex → all bases
+devtoolkit baseconv 0b11111111        # Binary → all bases
+devtoolkit baseconv 255 -o hex        # Output hex only
+devtoolkit baseconv -i hex -o dec FF  # Explicit hex → decimal
+```
+
+| Flag | Default | Description |
+|------|---------|-------------|
+| `VALUE` | — | Integer to convert (prefix auto-detects base) |
+| `-i`, `--input-base` | auto | Force input base: `dec`, `hex`, `bin`, `oct` |
+| `-o`, `--output-base` | all | Output a single base: `dec`, `hex`, `bin`, `oct` |
+
 ---
 
 ## ➕ How to Add a New Tool
@@ -286,7 +338,10 @@ devtoolkit/
 │       ├── hashit.py        # Day 5: Hash Calculator
 │       ├── uuidgen.py      # Day 6: UUID Generator
 │       ├── base64tool.py   # Day 7: Base64 Encoder/Decoder
-│       └── epoch.py        # Day 8: Epoch Timestamp Converter
+│       ├── epoch.py        # Day 8: Epoch Timestamp Converter
+│       ├── note.py         # Day 9: Quick Note
+│       ├── cronhelp.py     # Day 10: Cron Expression Helper
+│       └── baseconv.py     # Day 11: Base Converter
 └── .gitignore
 ```
 
@@ -296,9 +351,6 @@ devtoolkit/
 
 | Day | Planned Tool | Description |
 |-----|-------------|-------------|
-| Day 9 | 📝 Note | 快速筆記儲存到本地 Markdown 檔案 |
-| Day 10 | ⏰ Cron Helper | 人類可讀的 cron 表達式解釋器 |
-| Day 11 | 🔢 進制轉換 | 十進位、十六進位、二進位、八進位互轉 |
 
 ---
 
