@@ -1,0 +1,34 @@
+[build-system]
+requires = ["setuptools>=68", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "devtoolkit"
+version = "0.1.0"
+description = "A plugin-based Python CLI toolkit — one new tool added every day"
+readme = "README.md"
+license = { text = "MIT" }
+authors = [{ name = "林夏安", email = "r0987765@gmail.com" }]
+requires-python = ">=3.10"
+keywords = ["cli", "toolkit", "plugins", "productivity"]
+classifiers = [
+    "Development Status :: 3 - Alpha",
+    "Environment :: Console",
+    "Intended Audience :: Developers",
+    "License :: OSI Approved :: MIT License",
+    "Programming Language :: Python :: 3",
+    "Programming Language :: Python :: 3.10",
+    "Programming Language :: Python :: 3.11",
+    "Programming Language :: Python :: 3.12",
+    "Topic :: Utilities",
+]
+
+# No third-party dependencies — pure stdlib!
+dependencies = []
+
+[project.scripts]
+devtoolkit = "devtoolkit.main:main"
+
+[tool.setuptools.packages.find]
+where = ["."]
+include = ["devtoolkit*"]

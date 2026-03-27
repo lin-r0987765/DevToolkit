@@ -1,0 +1,7 @@
+# DevToolkit uses Python's standard library only.
+# No third-party dependencies required!
+#
+# Dev dependencies (optional):
+# pytest>=7.0
+# black>=23.0
+# ruff>=0.1
