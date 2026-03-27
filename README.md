@@ -65,6 +65,9 @@ devtoolkit <tool> --help   # tool-specific help
 | Day 3 | 🔐 Password Generator | `devtoolkit passgen` | Cryptographically secure password & PIN generator |
 | Day 4 | 📋 JSON Formatter | `devtoolkit jsonfmt` | Pretty-print, minify, validate, and inspect JSON |
 | Day 5 | 🔑 Hash Calculator | `devtoolkit hashit` | Compute MD5/SHA/BLAKE2 hashes for files or strings |
+| Day 6 | 🆔 UUID 產生器 | `devtoolkit uuidgen` | 產生 UUID v1/v4/v5，支援大寫與批次輸出 |
+| Day 7 | 🔄 Base64 編解碼 | `devtoolkit base64tool` | Base64 編碼與解碼，支援字串、檔案與 URL-safe 模式 |
+| Day 8 | ⏱ 時間戳轉換 | `devtoolkit epoch` | Unix 時間戳與可讀時間互轉，支援時區與毫秒 |
 
 ### `timer` — Pomodoro Timer
 
@@ -169,6 +172,61 @@ devtoolkit hashit -f myfile.zip --verify abc123  # Verify against known hash
 | `--verify HASH` | — | Compare against a known hash (exit 1 on mismatch) |
 | `--upper` | off | Output hash in UPPERCASE |
 
+### `uuidgen` — UUID 產生器
+
+```bash
+devtoolkit uuidgen                         # 產生一組 UUID v4（預設）
+devtoolkit uuidgen -n 5                    # 一次產生 5 組
+devtoolkit uuidgen -v 1                    # UUID v1（時間戳）
+devtoolkit uuidgen -v 5 --name example.com # UUID v5（命名空間 SHA-1）
+devtoolkit uuidgen --upper                 # 大寫輸出
+```
+
+| Flag | Default | Description |
+|------|---------|-------------|
+| `-v`, `--version` | `4` | UUID 版本：1、4、5 |
+| `-n`, `--count` | `1` | 產生數量 |
+| `--upper` | off | 大寫輸出 |
+| `--ns` | `dns` | v5 命名空間：dns、url、oid、x500 |
+| `--name` | — | v5 名稱字串 |
+
+### `base64tool` — Base64 編解碼
+
+```bash
+devtoolkit base64tool "Hello World"        # 編碼字串
+devtoolkit base64tool -d "SGVsbG8gV29ybGQ=" # 解碼
+devtoolkit base64tool -f image.png          # 編碼檔案
+devtoolkit base64tool -d -f data.b64 -o out.bin  # 解碼並輸出到檔案
+devtoolkit base64tool --urlsafe "Hello"     # URL-safe 編碼
+```
+
+| Flag | Default | Description |
+|------|---------|-------------|
+| `INPUT` | stdin | 要編碼/解碼的字串 |
+| `-d`, `--decode` | off | 解碼模式 |
+| `-f`, `--file` | — | 從檔案讀取 |
+| `-o`, `--output` | — | 輸出到檔案 |
+| `--urlsafe` | off | URL-safe Base64 |
+
+### `epoch` — 時間戳轉換
+
+```bash
+devtoolkit epoch                            # 顯示目前時間戳
+devtoolkit epoch 1700000000                 # 轉換為可讀時間
+devtoolkit epoch 1700000000000 --ms         # 毫秒級時間戳
+devtoolkit epoch 1700000000 --utc           # 以 UTC 顯示
+devtoolkit epoch 1700000000 --tz 8          # 以 UTC+8 顯示
+devtoolkit epoch -r "2024-01-15 12:30:00"  # 可讀時間 → 時間戳
+```
+
+| Flag | Default | Description |
+|------|---------|-------------|
+| `TIMESTAMP` | — | Unix 時間戳（不給則顯示目前時間） |
+| `-r`, `--reverse` | — | 可讀時間 → 時間戳 |
+| `--utc` | off | 以 UTC 顯示 |
+| `--tz` | — | UTC 偏移（小時） |
+| `--ms` | off | 輸入為毫秒級時間戳 |
+
 ---
 
 ## ➕ How to Add a New Tool
@@ -225,7 +283,10 @@ devtoolkit/
 │       ├── weather.py       # Day 2: Weather Lookup
 │       ├── passgen.py       # Day 3: Password Generator
 │       ├── jsonfmt.py       # Day 4: JSON Formatter & Validator
-│       └── hashit.py        # Day 5: Hash Calculator
+│       ├── hashit.py        # Day 5: Hash Calculator
+│       ├── uuidgen.py      # Day 6: UUID Generator
+│       ├── base64tool.py   # Day 7: Base64 Encoder/Decoder
+│       └── epoch.py        # Day 8: Epoch Timestamp Converter
 └── .gitignore
 ```
 
@@ -235,9 +296,9 @@ devtoolkit/
 
 | Day | Planned Tool | Description |
 |-----|-------------|-------------|
-| Day 6 | 📝 Note | Quick sticky-note saver to a local markdown file |
-| Day 7 | 📋 Clipboard | Cross-platform clipboard history viewer |
-| Day 8 | ⏰ Cron Helper | Human-readable cron expression explainer |
+| Day 9 | 📝 Note | 快速筆記儲存到本地 Markdown 檔案 |
+| Day 10 | ⏰ Cron Helper | 人類可讀的 cron 表達式解釋器 |
+| Day 11 | 🔢 進制轉換 | 十進位、十六進位、二進位、八進位互轉 |
 
 ---
 
