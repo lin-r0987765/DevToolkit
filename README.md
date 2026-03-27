@@ -71,6 +71,9 @@ devtoolkit <tool> --help   # tool-specific help
 | Day 9 | 📝 Quick Note | `devtoolkit note` | Save, list, and search notes in a local Markdown file |
 | Day 10 | ⏰ Cron Helper | `devtoolkit cronhelp` | Parse and explain cron expressions in plain language |
 | Day 11 | 🔢 Base Converter | `devtoolkit baseconv` | Convert integers between decimal, hex, binary, and octal |
+| Day 12 | 📊 Word Count | `devtoolkit wordcount` | Count words, lines, characters, and sentences in text or files |
+| Day 13 | 🎲 Dice Roller | `devtoolkit dice` | Roll dice using RPG notation (e.g. 2d6, 1d20+5, 4d6kh3) |
+| Day 14 | 📝 Lorem Ipsum | `devtoolkit lorem` | Generate lorem ipsum placeholder text for design and development |
 
 ### `timer` — Pomodoro Timer
 
@@ -279,6 +282,63 @@ devtoolkit baseconv -i hex -o dec FF  # Explicit hex → decimal
 | `-i`, `--input-base` | auto | Force input base: `dec`, `hex`, `bin`, `oct` |
 | `-o`, `--output-base` | all | Output a single base: `dec`, `hex`, `bin`, `oct` |
 
+### `wordcount` — Word Count
+
+```bash
+devtoolkit wordcount README.md             # Full stats for a file
+cat essay.txt | devtoolkit wordcount       # From stdin
+devtoolkit wordcount -t "Hello world"      # Analyze a string directly
+devtoolkit wordcount README.md --words     # Word count only
+devtoolkit wordcount README.md --freq 10   # Top 10 most frequent words
+```
+
+| Flag | Default | Description |
+|------|---------|-------------|
+| `FILE` | stdin | File to analyze (optional) |
+| `-t`, `--text` | — | Analyze a string directly |
+| `--chars` | off | Show only character count |
+| `--words` | off | Show only word count |
+| `--lines` | off | Show only line count |
+| `--sentences` | off | Show only sentence count |
+| `--freq N` | — | Show top N most frequent words |
+
+### `dice` — Dice Roller
+
+```bash
+devtoolkit dice                   # Roll 1d6 (default)
+devtoolkit dice 2d6               # Roll two six-sided dice
+devtoolkit dice 1d20+5            # Roll with modifier
+devtoolkit dice 4d6kh3            # Roll 4d6, keep highest 3 (D&D stats)
+devtoolkit dice 1d20 -n 10 -s    # Roll 10 times with statistics
+```
+
+| Flag | Default | Description |
+|------|---------|-------------|
+| `EXPRESSION` | `1d6` | Dice expression: NdS[+/-M] or NdS[kh/kl]K |
+| `-n`, `--repeat` | `1` | Roll the expression N times |
+| `-s`, `--stats` | off | Show sum, min, max, average after multiple rolls |
+| `--seed` | — | Random seed for reproducible results |
+
+### `lorem` — Lorem Ipsum Generator
+
+```bash
+devtoolkit lorem                  # One paragraph (default)
+devtoolkit lorem -p 3             # Three paragraphs
+devtoolkit lorem -s 5             # Five sentences
+devtoolkit lorem -w 50            # Exactly 50 words
+devtoolkit lorem --no-classic     # Skip the classic opening
+devtoolkit lorem -p 2 --copy     # No trailing newline (for piping)
+```
+
+| Flag | Default | Description |
+|------|---------|-------------|
+| `-w`, `--words` | — | Generate exactly N words |
+| `-s`, `--sentences` | — | Generate exactly N sentences |
+| `-p`, `--paragraphs` | `1` | Generate N paragraphs |
+| `--no-classic` | off | Don't start with "Lorem ipsum dolor sit amet..." |
+| `--seed` | — | Random seed for reproducible output |
+| `--copy` | off | No trailing newline (useful for piping) |
+
 ---
 
 ## ➕ How to Add a New Tool
@@ -341,7 +401,10 @@ devtoolkit/
 │       ├── epoch.py        # Day 8: Epoch Timestamp Converter
 │       ├── note.py         # Day 9: Quick Note
 │       ├── cronhelp.py     # Day 10: Cron Expression Helper
-│       └── baseconv.py     # Day 11: Base Converter
+│       ├── baseconv.py     # Day 11: Base Converter
+│       ├── wordcount.py   # Day 12: Word Count
+│       ├── dice.py        # Day 13: Dice Roller
+│       └── lorem.py       # Day 14: Lorem Ipsum Generator
 └── .gitignore
 ```
 
